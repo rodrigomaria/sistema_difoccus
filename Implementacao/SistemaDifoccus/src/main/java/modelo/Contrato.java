@@ -3,19 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.difoccus.sistemadifoccus.modelo;
+package modelo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+<<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
 import java.util.List;
 import javax.persistence.Column;
+=======
+>>>>>>> parent of 9baeb29... Mudanças do Front End:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+=======
+import javax.persistence.Table;
+>>>>>>> parent of 9baeb29... Mudanças do Front End:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
 
 /**
  *
@@ -32,12 +39,16 @@ public class Contrato {
     
     @Column(length = 50, nullable = false)
     private String universidade;
+<<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
     
     @Column(length = 20, nullable = false)
     private String semestre;
     
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+=======
+    private int semestre;
+>>>>>>> parent of 9baeb29... Mudanças do Front End:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
     private Date data;
     
     @Column(nullable = false)
@@ -61,12 +72,16 @@ public class Contrato {
     
     @Column(nullable = false)
     private double creditoFotografico;
+<<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
     
 //    @ManyToMany
 //    @JoinTable()
 //    private List<Midia> midia;
     
     @Column(nullable = false)
+=======
+    private Midia midia;
+>>>>>>> parent of 9baeb29... Mudanças do Front End:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
     private boolean fotosLiberadas;
     
     @Column(nullable = false, precision = 8, scale = 2)
@@ -101,10 +116,10 @@ public class Contrato {
         this.universidade = universidade;
     }
 
-    public String getSemestre() {
+    public int getSemestre() {
         return semestre;
     }
-    public void setSemestre(String semestre) {
+    public void setSemestre(int semestre) {
         this.semestre = semestre;
     }
 

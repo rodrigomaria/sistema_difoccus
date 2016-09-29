@@ -8,9 +8,10 @@
 
     <ui:composition template="templates/padraoInterno.xhtml">
         <ui:define name="titulo">
-            Contratos
+            Cadastro de funcionário
         </ui:define>
         <ui:define name="conteudo">
+<<<<<<< HEAD
             <p:growl id="mensagem" />
             <h:form id="formListagem">
                 <p:panel header="Lista de Contratos">
@@ -56,6 +57,32 @@
                 <h:form id="formCadastro">
                     <h:panelGrid columns="2" id="painel">  
 
+=======
+            <p:growl/>
+            <p:dataTable>
+                <f:facet name="header">
+                    Contratos - Listagem
+		</f:facet>                
+                <p:column headerText="Contrato">
+                    <h:outputText value="contrato" />
+		</p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="status" />
+		</p:column>
+                <f:facet name="footer">
+                    <h:form>
+                        <p:commandButton value="Novo" oncomplete="PF('dlgContNovo').show(); PF('dlgContNovo').content.scrollTop('0')" />
+                    </h:form>
+		</f:facet>
+            </p:dataTable>
+            
+            <p:dialog widgetVar="dlgContNovo" closable="false" draggable="false" style="height: 200px;"
+                      resizable="false" header="Contrato - Novo" modal="true" appendTo="@(body)"> 
+                
+                <h:form id="frmContNovo">
+                    <h:panelGrid columns="2" id="pnlContNovo">  
+                        
+>>>>>>> parent of 9baeb29... Mudanças do Front End
                         <p:outputLabel for="txtUniversidadeContNovo" value="Universidade: " indicateRequired="false"/>
                         <p:inputText value="#{contratoBean.contrato.universidade}"
                                      id="txtUniversidadeContNovo" maxlength="50" size="30" required="true" 
@@ -104,7 +131,19 @@
                                      id="txtCreditoFotograficoContNovo" maxlength="7" size="5" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
+<<<<<<< HEAD
 
+=======
+                        
+                        <p:outputLabel value="Midia: " for="txtMidiaContNovo"/>
+                        <p:selectManyCheckbox  id="txtMidiaContNovo" >
+                            <f:selectItem itemLabel="DVD" itemValue="" />
+                            <f:selectItem itemLabel="Bd" itemValue="" />
+                            <f:selectItem itemLabel="USB" itemValue="" />
+                            <f:selectItem itemLabel="Link" itemValue="" />
+                        </p:selectManyCheckbox>
+                        
+>>>>>>> parent of 9baeb29... Mudanças do Front End
                         <p:outputLabel for="txtFotosLiberadasContNovo" value="Fotos Liberadas: " indicateRequired="false"/>
                         <p:selectBooleanCheckbox id="txtFotosLiberadasContNovo" value="#{contratoBean.contrato.fotosLiberadas}" />
 

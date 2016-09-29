@@ -1,4 +1,4 @@
-package br.com.difoccus.sistemadifoccus.modelo;
+package modelo;
 
 import java.util.Date;
 import javax.persistence.Entity;
