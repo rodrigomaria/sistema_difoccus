@@ -5,146 +5,126 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+    
     <ui:composition template="templates/padraoInterno.xhtml">
         <ui:define name="titulo">
             Contratos
         </ui:define>
         <ui:define name="conteudo">
-            <p:growl id="mensagem" />
-            <h:form id="formListagem">
-                <p:panel header="Lista de Contratos">
-                    <p:dataTable id="tabela" value="#{contratoBean.contratos}" var="contrato" 
-                                 emptyMessage="Não tem nada" paginator="true" paginatorPosition="bottom" rows="20">
+            <p:growl/>
+            <p:dataTable emptyMessage="Não tem nada">
+                <f:facet name="header">
+                    Contratos - Listagem
+		</f:facet>                
+                <p:column headerText="Contrato">
+                    <h:outputText value="contrato" />
+		</p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="status" />
+		</p:column>
+                <f:facet name="footer">
+                    <h:form>
+                        <p:commandButton value="Novo" oncomplete="PF('dlgContNovo').show(); PF('dlgContNovo').content.scrollTop('0')" />
+                    </h:form>
+		</f:facet>
+            </p:dataTable>
+            
+            <p:dialog widgetVar="dlgContNovo" closable="false" draggable="false" style="height: 200px;"
+                      resizable="false" header="Contrato - Novo" modal="true" appendTo="@(body)"> 
+                
+                <h:form id="frmContNovo">
+                    <h:panelGrid columns="2" id="pnlContNovo">  
                         
-                        <f:facet name="footer">                            
-                            <p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
-                                             actionListener="#{contratoBean.novo}" 
-                                             update=":formCadastro:painel" />                            
-                        </f:facet> 
-                        
-                        <p:column headerText="Contrato">
-                            <h:outputText value="#{contrato.semestre}" />
-                        </p:column>
-                        
-                        <p:column headerText="Status">
-                            <h:outputText value="#{contrato.status}"/>
-                        </p:column>
-                        
-                        <p:column headerText="Opções">
-                            <p:commandButton icon="ui-icon-trash" actionListener="#{contratoBean.excluir}" 
-                                             update=":formListagem:tabela">
-				<p:confirm header="Confirmação" message="Deseja excluir este contrato ?" icon="ui-icon-alert" />
-				<f:attribute name="contratoSelecionado" value="#{contrato}"/>					
-                            </p:commandButton>
-                            
-                        </p:column>
-                    </p:dataTable>
-
-                    <p:confirmDialog global="true">
-                        <p:commandButton value="Sim" type="button"
-                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                        <p:commandButton value="Não" type="button"
-                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
-                </p:panel>
-            </h:form>
-
-            <p:dialog widgetVar="dialogo" closable="false" draggable="false" style="height: 200px;"
-                      resizable="false" header="Novo Contrato" modal="true" appendTo="@(body)"> 
-
-                <h:form id="formCadastro">
-                    <h:panelGrid columns="2" id="painel">  
-
                         <p:outputLabel for="txtUniversidadeContNovo" value="Universidade: " indicateRequired="false"/>
-                        <p:inputText value="#{contratoBean.contrato.universidade}"
-                                     id="txtUniversidadeContNovo" maxlength="50" size="30" required="true" 
-                                     requiredMessage="Campo nome é obrigatório" />
-
-                        <p:outputLabel for="txtSemestreContNovo" value="Semestre: " indicateRequired="false"/>                        
-                        <p:inputText value="#{contratoBean.contrato.semestre}" 
-                                     id="txtSemestreContNovo" maxlength="50" size="30" 
+                        <p:inputText value="" 
+                                     id="txtUniversidadeContNovo" maxlength="50" size="30" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-
+                        <p:outputLabel for="txtSemestreContNovo" value="Semestre: " indicateRequired="false"/>
+                        
+                        <p:selectOneButton id="txtSemestreContNovo" value="" required="true">
+                            <f:selectItem itemLabel="1" itemValue="1" />
+                            <f:selectItem itemLabel="2" itemValue="2" />
+                        </p:selectOneButton>
+                        
                         <p:outputLabel for="txtDataContNovo" value="Data: " indicateRequired="false"/>
-                        <p:calendar id="txtDataContNovo" pattern="dd/MM/yyyy" mask="true"
-                                    required="true"  value="#{contratoBean.contrato.data}"/>
-
-                        <p:outputLabel for="txtHorarioContNovo" value="Horário: " indicateRequired="false"/>
-                        <p:calendar id="txtHorarioContNovo" pattern="HH:mm" timeOnly="true" 
-                                    required="true"  value="#{contratoBean.contrato.horario}"/>
-
+                        <p:calendar id="txtDataContNovo" pattern="dd/MM/yyyy" mask="true" />
+                        
+                        <p:outputLabel for="txtHoraContNovo" value="Hora: " indicateRequired="false"/>
+                        <p:calendar id="txtHoraContNovo" pattern="HH:mm" timeOnly="true" />
+                        
                         <p:outputLabel for="txtSenhaContNovo" value="Senha: " indicateRequired="false"/>
-                        <p:inputText value="#{contratoBean.contrato.senha}" 
+                        <p:inputText value="" 
                                      id="txtSenhaContNovo" maxlength="50" size="30" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-
+                        
                         <p:outputLabel for="txtFestasContNovo" value="Quantidade festas: " indicateRequired="false"/>
-                        <p:inputText value="#{contratoBean.contrato.festas}" 
+                        <p:inputText value="" 
                                      id="txtFestasContNovo" maxlength="7" size="5" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-
+                        
                         <p:outputLabel for="txtFotosContNovo" value="Quantidade fotos: " indicateRequired="false"/>
-                        <p:inputText value="#{contratoBean.contrato.fotos}" 
+                        <p:inputText value="" 
                                      id="txtFotosContNovo" maxlength="7" size="5" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-
+                        
                         <p:outputLabel value="Prova de Toga: " for="txtTogaContNovo"/>
-                        <p:selectBooleanCheckbox id="txtTogaContNovo" value="#{contratoBean.contrato.toga}" />
-
+                        <p:selectBooleanCheckbox id="txtTogaContNovo" value="" />
+                        
                         <p:outputLabel value="Teaser: " for="txtTeaserContNovo"/>
-                        <p:selectBooleanCheckbox id="txtTeaserContNovo" value="#{contratoBean.contrato.teaser}" />
-
+                        <p:selectBooleanCheckbox id="txtTeaserContNovo" value="" />
+                        
                         <p:outputLabel for="txtCreditoFotograficoContNovo" value="Quantidade fotos: " indicateRequired="false"/>
-                        <p:inputText value="#{contratoBean.contrato.creditoFotografico}" 
+                        <p:inputText value="" 
                                      id="txtCreditoFotograficoContNovo" maxlength="7" size="5" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-
+                        
+                                               
+                        
+                       
+                        
                         <p:outputLabel for="txtFotosLiberadasContNovo" value="Fotos Liberadas: " indicateRequired="false"/>
-                        <p:selectBooleanCheckbox id="txtFotosLiberadasContNovo" value="#{contratoBean.contrato.fotosLiberadas}" />
-
+                        <p:selectBooleanCheckbox id="txtFotosLiberadasContNovo" value="" />
+                        
                         <p:outputLabel for="txtValorTotalContNovo" value="Valor Total: " indicateRequired="false"/>
-                        <p:inputNumber value="#{contratoBean.contrato.valorTotal}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
-                                       id="txtValorTotalContNovo" maxlength="10" size="12" 
-                                       required="true" 
-                                       requiredMessage="Campo nome é obrigatório"/>
-
+                        <p:inputNumber value="" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                     id="txtValorTotalContNovo" maxlength="10" size="12" 
+                                     required="true" 
+                                     requiredMessage="Campo nome é obrigatório"/>
+                        
                         <p:outputLabel for="txtValorVistaContNovo" value="Valor Vista: " indicateRequired="false"/>
-                        <p:inputNumber value="#{contratoBean.contrato.valorVista}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
-                                       id="txtValorVistaContNovo" maxlength="10" size="12" 
-                                       required="true" 
-                                       requiredMessage="Campo nome é obrigatório"/>
-
+                        <p:inputNumber value="" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                     id="txtValorVistaContNovo" maxlength="10" size="12" 
+                                     required="true" 
+                                     requiredMessage="Campo nome é obrigatório"/>
+                        
                         <p:outputLabel for="txtValorFormandoContNovo" value="Valor Formando: " indicateRequired="false"/>
-                        <p:inputNumber value="#{contratoBean.contrato.valorFormando}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
-                                       id="txtValorFormandoContNovo" maxlength="10" size="12" 
-                                       required="true" 
-                                       requiredMessage="Campo nome é obrigatório"/>
-
+                        <p:inputNumber value="" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                     id="txtValorFormandoContNovo" maxlength="10" size="12" 
+                                     required="true" 
+                                     requiredMessage="Campo nome é obrigatório"/>
+                        
                         <p:outputLabel for="txtObservacoesContNovo" value="Observações: " indicateRequired="false"/>
-                        <p:inputTextarea value="#{contratoBean.contrato.observacoes}" rows="5" cols="50" maxlength="100"
-                                         id="txtObservacoesContNovo" 
-                                         required="true" 
-                                         requiredMessage="Campo nome é obrigatório"/>
+                        <p:inputTextarea value="" rows="5" cols="50" maxlength="100"
+                                     id="txtObservacoesContNovo" 
+                                     required="true" 
+                                     requiredMessage="Campo nome é obrigatório"/>
                     </h:panelGrid>
                     <h:panelGrid columns="2">
-                        <p:commandButton value="Salvar"  actionListener="#{contratoBean.salvar}" oncomplete="PF('dialogo').hide();"
-                                         update=":mensagem :formCadastro:painel :formListagem:tabela"/>
-                        
-                        <p:commandButton value="Cancelar" oncomplete="PF('dialogo').hide();" process="@this">                            
+                            <p:commandButton value="Gravar" />
+                            <p:commandButton value="Cancelar" 
+						onclick="PF('dlgContNovo').hide();"
+						process="@this">
                             <p:resetInput target="pnlConNovo"/>
-			</p:commandButton>
-                            
+                            </p:commandButton>
                     </h:panelGrid>	
                 </h:form>
+                
             </p:dialog>
-            
-            
         </ui:define>
     </ui:composition>
 </html>
