@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="funcionarios")
 public class Funcionario {
     @Id
     @GeneratedValue
