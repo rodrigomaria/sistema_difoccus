@@ -9,12 +9,12 @@ import modelo.Funcionario;
 import persistencia.FuncionarioDAO;
 
 @ManagedBean(name="funcionarioBean")
-public class CadastroFuncionarioBean {
+public class FuncionarioBean {
     private Funcionario funcionario = new Funcionario();
     private final FuncionarioDAO dao = new FuncionarioDAO();
     private List<Funcionario> listaFuncionarios;
     
-    public CadastroFuncionarioBean() {
+    public FuncionarioBean() {
         listaFuncionarios = dao.listar();
     }
     
