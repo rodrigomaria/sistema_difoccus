@@ -41,8 +41,8 @@ public class ContratoBean {
         contrato = dao.carregar(id);
     }
     
-    public void remover(Contrato f) {
-        dao.remover(f);
+    public void remover(Contrato c) {
+        dao.remover(c);
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato removido com sucesso.", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         listaContratos.remove(contrato);
