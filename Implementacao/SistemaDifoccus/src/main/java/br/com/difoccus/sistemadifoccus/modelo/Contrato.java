@@ -5,45 +5,79 @@
  */
 package br.com.difoccus.sistemadifoccus.modelo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author awsilva
  */
 @Entity
-@Table(name="contratos")
 public class Contrato {    
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
     private int status;
+    
+    @Column(length = 50, nullable = false)
     private String universidade;
+    
+    @Column(length = 20, nullable = false)
     private String semestre;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date data;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIME)
     private Date horario;
+    
+    @Column(length = 32, nullable = false)
     private String senha;
+    
+    @Column(nullable = false)
     private int festas;
-    private int fotos;
+    
+    @Column(nullable = false)
+    private int fotos;    
+    
+    @Column(nullable = false)
     private boolean toga;
+    
+    @Column(nullable = false)
     private boolean teaser;
+    
+    @Column(nullable = false)
     private double creditoFotografico;
     
 //    @ManyToMany
 //    @JoinTable()
 //    private List<Midia> midia;
+    
+    @Column(nullable = false)
     private boolean fotosLiberadas;
-    private double valorTotal;
-    private double valorVista;
-    private double valorFormando;
+    
+    @Column(nullable = false, precision = 8, scale = 2)
+    private int valorTotal;
+    
+    @Column(nullable = false, precision = 8, scale = 2)
+    private int valorVista;
+    
+    @Column(nullable = false, precision = 7, scale = 2)
+    private int valorFormando;
+    
     private String observacoes;
 
     public int getId() {
@@ -135,13 +169,13 @@ public class Contrato {
         this.creditoFotografico = creditoFotografico;
     }
 
-    public String getMidia() {
-        return midia;
-    }
-
-    public void setMidia(String midia) {
-        this.midia = midia;
-    }
+//    public String getMidia() {
+//        return midia;
+//    }
+//
+//    public void setMidia(String midia) {
+//        this.midia = midia;
+//    }
 
     public boolean getFotosLiberadas() {
         return fotosLiberadas;
@@ -151,27 +185,27 @@ public class Contrato {
         this.fotosLiberadas = fotosLiberadas;
     }
 
-    public double getValorTotal() {
+    public int getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(double valorTotal) {
+    public void setValorTotal(int valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    public double getValorVista() {
+    public int getValorVista() {
         return valorVista;
     }
 
-    public void setValorVista(double valorVista) {
+    public void setValorVista(int valorVista) {
         this.valorVista = valorVista;
     }
 
-    public double getValorFormando() {
+    public int getValorFormando() {
         return valorFormando;
     }
 
-    public void setValorFormando(double valorFormando) {
+    public void setValorFormando(int valorFormando) {
         this.valorFormando = valorFormando;
     }
 
