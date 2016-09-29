@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package br.com.difoccus.sistemadifoccus.modelo;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +27,7 @@ public class Contrato {
     private int id;
     private int status;
     private String universidade;
-    private int semestre;
+    private String semestre;
     private Date data;
     private Date horario;
     private String senha;
@@ -33,7 +36,10 @@ public class Contrato {
     private boolean toga;
     private boolean teaser;
     private double creditoFotografico;
-    private Midia midia;
+    
+//    @ManyToMany
+//    @JoinTable()
+//    private List<Midia> midia;
     private boolean fotosLiberadas;
     private double valorTotal;
     private double valorVista;
@@ -61,10 +67,10 @@ public class Contrato {
         this.universidade = universidade;
     }
 
-    public int getSemestre() {
+    public String getSemestre() {
         return semestre;
     }
-    public void setSemestre(int semestre) {
+    public void setSemestre(String semestre) {
         this.semestre = semestre;
     }
 

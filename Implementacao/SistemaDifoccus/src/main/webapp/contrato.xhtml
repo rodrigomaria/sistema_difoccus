@@ -8,11 +8,11 @@
     
     <ui:composition template="templates/padraoInterno.xhtml">
         <ui:define name="titulo">
-            Cadastro de funcionário
+            Contratos
         </ui:define>
         <ui:define name="conteudo">
             <p:growl/>
-            <p:dataTable>
+            <p:dataTable emptyMessage="Não tem nada">
                 <f:facet name="header">
                     Contratos - Listagem
 		</f:facet>                
@@ -83,13 +83,9 @@
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
                         
-                        <p:outputLabel value="Midia: " for="txtMidiaContNovo"/>
-                        <p:selectManyCheckbox  id="txtMidiaContNovo" >
-                            <f:selectItem itemLabel="DVD" itemValue="" />
-                            <f:selectItem itemLabel="Bd" itemValue="" />
-                            <f:selectItem itemLabel="USB" itemValue="" />
-                            <f:selectItem itemLabel="Link" itemValue="" />
-                        </p:selectManyCheckbox>
+                                               
+                        
+                       
                         
                         <p:outputLabel for="txtFotosLiberadasContNovo" value="Fotos Liberadas: " indicateRequired="false"/>
                         <p:selectBooleanCheckbox id="txtFotosLiberadasContNovo" value="" />
