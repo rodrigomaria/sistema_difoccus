@@ -1,12 +1,12 @@
-package br.com.difoccus.sistemadifoccus.bean;
+package Beans;
 
 import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import br.com.difoccus.sistemadifoccus.modelo.Funcionario;
-import br.com.difoccus.sistemadifoccus.dao.FuncionarioDAO;
+import modelo.Funcionario;
+import persistencia.FuncionarioDAO;
 
 @ManagedBean(name="funcionarioBean")
 public class FuncionarioBean {

@@ -5,40 +5,45 @@
  */
 package modelo;
 
-import java.math.BigDecimal;
 import java.util.Date;
 <<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
 import java.util.List;
+<<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
 import javax.persistence.Column;
 =======
 >>>>>>> parent of 9baeb29... Mudanças do Front End:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
+=======
+>>>>>>> parent of eb286a5... Salvar erExclguir:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
 <<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 =======
 import javax.persistence.Table;
 >>>>>>> parent of 9baeb29... Mudanças do Front End:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
+=======
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+>>>>>>> parent of eb286a5... Salvar erExclguir:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
 
 /**
  *
  * @author awsilva
  */
 @Entity
+@Table(name="contratos")
 public class Contrato {    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
-    
-    @Column
     private int status;
-    
-    @Column(length = 50, nullable = false)
     private String universidade;
+<<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
 <<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
     
     @Column(length = 20, nullable = false)
@@ -49,50 +54,34 @@ public class Contrato {
 =======
     private int semestre;
 >>>>>>> parent of 9baeb29... Mudanças do Front End:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
+=======
+    private String semestre;
+>>>>>>> parent of eb286a5... Salvar erExclguir:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
     private Date data;
-    
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIME)
     private Date horario;
-    
-    @Column(length = 32, nullable = false)
     private String senha;
-    
-    @Column(nullable = false)
     private int festas;
-    
-    @Column(nullable = false)
-    private int fotos;    
-    
-    @Column(nullable = false)
+    private int fotos;
     private boolean toga;
-    
-    @Column(nullable = false)
     private boolean teaser;
-    
-    @Column(nullable = false)
     private double creditoFotografico;
 <<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
     
 //    @ManyToMany
 //    @JoinTable()
 //    private List<Midia> midia;
+<<<<<<< HEAD:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
     
     @Column(nullable = false)
 =======
     private Midia midia;
 >>>>>>> parent of 9baeb29... Mudanças do Front End:Implementacao/SistemaDifoccus/src/main/java/modelo/Contrato.java
+=======
+>>>>>>> parent of eb286a5... Salvar erExclguir:Implementacao/SistemaDifoccus/src/main/java/br/com/difoccus/sistemadifoccus/modelo/Contrato.java
     private boolean fotosLiberadas;
-    
-    @Column(nullable = false, precision = 8, scale = 2)
-    private int valorTotal;
-    
-    @Column(nullable = false, precision = 8, scale = 2)
-    private int valorVista;
-    
-    @Column(nullable = false, precision = 7, scale = 2)
-    private int valorFormando;
-    
+    private double valorTotal;
+    private double valorVista;
+    private double valorFormando;
     private String observacoes;
 
     public int getId() {
@@ -184,13 +173,13 @@ public class Contrato {
         this.creditoFotografico = creditoFotografico;
     }
 
-//    public String getMidia() {
-//        return midia;
-//    }
-//
-//    public void setMidia(String midia) {
-//        this.midia = midia;
-//    }
+    public String getMidia() {
+        return midia;
+    }
+
+    public void setMidia(String midia) {
+        this.midia = midia;
+    }
 
     public boolean getFotosLiberadas() {
         return fotosLiberadas;
@@ -200,27 +189,27 @@ public class Contrato {
         this.fotosLiberadas = fotosLiberadas;
     }
 
-    public int getValorTotal() {
+    public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(int valorTotal) {
+    public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    public int getValorVista() {
+    public double getValorVista() {
         return valorVista;
     }
 
-    public void setValorVista(int valorVista) {
+    public void setValorVista(double valorVista) {
         this.valorVista = valorVista;
     }
 
-    public int getValorFormando() {
+    public double getValorFormando() {
         return valorFormando;
     }
 
-    public void setValorFormando(int valorFormando) {
+    public void setValorFormando(double valorFormando) {
         this.valorFormando = valorFormando;
     }
 
