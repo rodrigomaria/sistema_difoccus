@@ -38,6 +38,13 @@
 				<f:attribute name="contratoSelecionado" value="#{contrato}"/>					
                             </p:commandButton>
                             
+                            <p:commandButton icon="ui-icon-pencil"
+                                             actionListener="#{contratoBean.editar}"
+                                             update=":formCadastro:painel"
+                                             oncomplete="PF('dialogo').show();">
+				<f:attribute name="contratoSelecionado" value="#{contrato}" />
+                            </p:commandButton>
+                            
                         </p:column>
                     </p:dataTable>
 
