@@ -1,12 +1,12 @@
-package Beans;
+package br.com.difoccus.sistemadifoccus.bean;
 
 import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import modelo.Funcionario;
-import persistencia.FuncionarioDAO;
+import br.com.difoccus.sistemadifoccus.modelo.Funcionario;
+import br.com.difoccus.sistemadifoccus.dao.FuncionarioDAO;
 
 @ManagedBean(name="funcionarioBean")
 public class FuncionarioBean {
@@ -38,18 +38,13 @@ public class FuncionarioBean {
     }
     
     public void carregar(int id) {
-        funcionario = dao.carregar(id);
+        funcionario = dao.buscar(id);
     }
     
     public void remover(Funcionario f) {
-        dao.remover(f);
+        dao.excluir(f);
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Funcionario removido com sucesso.", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         listaFuncionarios.remove(funcionario);
-    }
-    
-    @PreDestroy
-    public void encerrar() {
-        dao.encerrar();
     }
 }
