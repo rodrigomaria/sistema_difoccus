@@ -5,152 +5,186 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
     <ui:composition template="templates/padraoInterno.xhtml">
         <ui:define name="titulo">
             Funcionários
         </ui:define>
         <ui:define name="conteudo">
-            <p:growl/>
-            <p:dataTable emptyMessage="Não tem nada">
-                <f:facet name="header">
-                    Funcionário - Listagem
-		</f:facet>                
-                <p:column headerText="Contrato">
-                    <h:outputText value="contrato" />
-		</p:column>
-                <p:column headerText="Status">
-                    <h:outputText value="status" />
-		</p:column>
-                <f:facet name="footer">
-                    <h:form>
-                        <p:commandButton value="Novo" oncomplete="PF('dlgFuncNovo').show(); PF('dlgFuncNovo').content.scrollTop('0')" />
-                    </h:form>
-		</f:facet>
-            </p:dataTable>
-            
+            <p:growl id="mensagem" />
+            <h:form id="formListagem">
+                <p:panel header="Lista de Funcionarios">
+                    <p:dataTable id="tabela" value="#{funcionarioBean.funcionarios}" var="funcionario" 
+                                 emptyMessage="Não tem nada" paginator="true" paginatorPosition="bottom" rows="20">
+
+                        <f:facet name="footer">                            
+                            <p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
+                                             actionListener="#{funcionarioBean.novo}" 
+                                             update=":formCadastro:painel" />                            
+                        </f:facet>                 
+                        <p:column headerText="Funcionario">
+                            <h:outputText value="#{funcionario.nome}" />
+                        </p:column>
+                        <p:column headerText="Cargo">
+                            <h:outputText value="#{funcionario.cargo}" />
+                        </p:column>
+                        <p:column headerText="Setor">
+                            <h:outputText value="#{funcionario.setor}" />
+                        </p:column>
+                        
+                        <p:column headerText="Opções">
+                            <p:commandButton icon="ui-icon-trash" actionListener="#{funcionarioBean.excluir}" 
+                                             update=":formListagem:tabela">
+				<p:confirm header="Confirmação" message="Deseja excluir este funcionario ?" icon="ui-icon-alert" />
+				<f:attribute name="funcionarioSelecionado" value="#{funcionario}"/>					
+                            </p:commandButton>
+                            
+                            <p:commandButton icon="ui-icon-pencil"
+                                             actionListener="#{funcionarioBean.editar}"
+                                             update=":formCadastro:painel"
+                                             oncomplete="PF('dialogo').show();">
+				<f:attribute name="funcionarioSelecionado" value="#{funcionario}" />
+                            </p:commandButton>
+                            
+                        </p:column>
+                        
+                    </p:dataTable>
+                    
+                    <p:confirmDialog global="true">
+                        <p:commandButton value="Sim" type="button"
+                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button"
+                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                    
+                </p:panel>
+            </h:form>
+
             <!--            
             nome, setor, cargo, RG, CPF, data de nascimento, banco, agência bancária, tipo de conta, 
             número da conta, telefone, e-mail, senha de acesso ao sistema, endereço, cidade e estado.
             -->
-            
-            <p:dialog widgetVar="dlgFuncNovo" closable="false" draggable="false" style="height: 200px;"
-                      resizable="false" header="Contrato - Novo" modal="true" appendTo="@(body)"> 
-                
-                <h:form id="frmContNovo">
-                    <h:panelGrid columns="2" id="pnlFuncNovo">  
-                        
+
+            <p:dialog widgetVar="dialogo" closable="false" draggable="false" style="height: 200px;"
+                      resizable="false" header="Novo Funcionario" modal="true" appendTo="@(body)"> 
+
+                <h:form id="formCadastro">
+                    <h:panelGrid columns="2" id="painel">  
+
                         <p:outputLabel for="txtNomeFuncNovo" value="Nome: " indicateRequired="false"/>
-                        <p:inputText value="" 
+                        <p:inputText value="#{funcionarioBean.funcionario.nome}" placeholder="teste"
                                      id="txtNomeFuncNovo" maxlength="50" size="30" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-                        
-                        <p:outputLabel for="txtSetorFuncNovo" value="Setor " indicateRequired="false"/>                        
-                        <p:selectOneMenu id="txtSetorFuncNovo" value="" style="width:125px">
+
+                        <p:outputLabel for="txtSetorFuncNovo" value="Setor: " indicateRequired="false"/>                        
+                        <p:selectOneMenu id="txtSetorFuncNovo" value="#{funcionarioBean.funcionario.setor}" style="width:125px">
                             <f:selectItem itemLabel="Setor 1" itemValue="Setor 1" />
                             <f:selectItem itemLabel="Setor 2" itemValue="Setor 2" />
                             <f:selectItem itemLabel="Setor 3" itemValue="Setor 3" />
                         </p:selectOneMenu>
-                        
-                        <p:outputLabel for="txtCargoFuncNovo" value="Setor " indicateRequired="false"/>                        
-                        <p:selectOneMenu id="txtCargoFuncNovo" value="" style="width:125px">
+
+                        <p:outputLabel for="txtCargoFuncNovo" value="Cargo: " indicateRequired="false"/>                        
+                        <p:selectOneMenu id="txtCargoFuncNovo" value="#{funcionarioBean.funcionario.cargo}" style="width:125px">
                             <f:selectItem itemLabel="Cargo 1" itemValue="Setor 1" />
                             <f:selectItem itemLabel="Cargo 2" itemValue="Setor 2" />
                             <f:selectItem itemLabel="Cargo 3" itemValue="Setor 3" />
                         </p:selectOneMenu>
-                        
+
                         <p:outputLabel for="txtRGFuncNovo" value="RG: " indicateRequired="false"/>
-                        <p:inputText value="" 
+                        <p:inputText value="#{funcionarioBean.funcionario.rg}" 
                                      id="txtRGFuncNovo" maxlength="50" size="10" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-                        
+
                         <p:outputLabel for="txtCPFFuncNovo" value="CPF: " indicateRequired="false"/>
-                        <p:inputText value="" 
+                        <p:inputText value="#{funcionarioBean.funcionario.cpf}" 
                                      id="txtCPFFuncNovo" maxlength="50" size="14" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-                        
+
                         <p:outputLabel for="txtDataFuncNovo" value="Data: " indicateRequired="false"/>
-                        <p:calendar id="txtDataFuncNovo" pattern="dd/MM/yyyy" mask="true" />
-                        
-                        <p:outputLabel for="txtBancoFuncNovo" value="Setor " indicateRequired="false"/>                        
-                        <p:selectOneMenu id="txtBancoFuncNovo" value="" style="width:125px">
+                        <p:calendar id="txtDataFuncNovo" value="#{funcionarioBean.funcionario.dataNascimento}" pattern="dd/MM/yyyy" mask="true" />
+
+                        <p:outputLabel for="txtBancoFuncNovo" value="Banco " indicateRequired="false"/>                        
+                        <p:selectOneMenu id="txtBancoFuncNovo" value="#{funcionarioBean.funcionario.banco}" style="width:125px">
                             <f:selectItem itemLabel="Banco do Brasil" itemValue="Banco do Brasil" />
                             <f:selectItem itemLabel="Banrisul" itemValue="Banrisul" />
                             <f:selectItem itemLabel="Caixa" itemValue="Caixa" />
                             <f:selectItem itemLabel="Itaú" itemValue="Itaú" />
-                        </p:selectOneMenu>
-                        
-                        <p:outputLabel for="txtAgenciaContNovo" value="Senha: " indicateRequired="false"/>
-                        <p:inputText value="" 
-                                     id="txtAgenciaContNovo" maxlength="50" size="30" 
+                        </p:selectOneMenu>                        
+
+                                           
+                        <p:outputLabel for="txtAgenciaFuncNovo" value="Agência " indicateRequired="false"/>
+                        <p:inputText value="#{funcionarioBean.funcionario.agencia}" 
+                                     id="txtAgenciaFuncNovo" maxlength="50" size="30" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-                        
-                        <p:outputLabel for="txtTipoContaContNovo" value="Senha: " indicateRequired="false"/>
-                        <p:selectOneMenu id="txtTipoContaContNovo" value="" style="width:125px">
+                               
+
+                        <p:outputLabel for="txtTipoContaFuncNovo" value="Tipo de Conta: " indicateRequired="false"/>
+                        <p:selectOneMenu id="txtTipoContaFuncNovo" value="#{funcionarioBean.funcionario.tipoConta}" style="width:125px">
                             <f:selectItem itemLabel="Corrente" itemValue="Corrente" />
                             <f:selectItem itemLabel="Poupança" itemValue="Poupança" />
                         </p:selectOneMenu>
-                        
-                        <p:outputLabel for="txtNumeroContaContNovo" value="Quantidade festas: " indicateRequired="false"/>
-                        <p:inputText value="" 
-                                     id="txtNumeroContaContNovo" maxlength="50" size="30" 
+
+                        <p:outputLabel for="txtNumeroContaFuncNovo" value="Numero da Conta: " indicateRequired="false"/>
+                        <p:inputText value="#{funcionarioBean.funcionario.numConta}" 
+                                     id="txtNumeroContaFuncNovo" maxlength="50" size="30" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-                        
-                        <p:outputLabel for="txtTelefoneContNovo" value="Quantidade fotos: " indicateRequired="false"/>
-                        <p:inputText value="" 
-                                     id="txtTelefoneContNovo" maxlength="50" size="30" 
+
+                        <p:outputLabel for="txtTelefoneFuncNovo" value="Telefone: " indicateRequired="false"/>
+                        <p:inputText value="#{funcionarioBean.funcionario.telefone}" 
+                                     id="txtTelefoneFuncNovo" maxlength="50" size="30" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-                        
-                        <p:outputLabel for="txtEmailContNovo" value="Quantidade fotos: " indicateRequired="false"/>                        
-                        <p:inputText value="" 
-                                     id="txtEmailContNovo" maxlength="50" size="30" 
+
+                        <p:outputLabel for="txtEmailFuncNovo" value="Email: " indicateRequired="false"/>                        
+                        <p:inputText value="#{funcionarioBean.funcionario.email}" 
+                                     id="txtEmailFuncNovo" maxlength="50" size="30" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
-                        
-                        <p:outputLabel for="txtSenhaContNovo" value="Quantidade fotos: " indicateRequired="false"/>                        
-                        <p:password value="" 
-                                     id="txtSenhaContNovo" maxlength="50" size="30" 
-                                     required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>
-                        
-                        <p:outputLabel for="txtEnderecoContNovo" value="Quantidade fotos: " indicateRequired="false"/>                        
-                        <p:password value="" 
-                                     id="txtEnderecoContNovo" maxlength="50" size="30" 
-                                     required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>
-                        
-                        <p:outputLabel for="txtCidadeContNovo" value="Quantidade fotos: " indicateRequired="false"/>                        
-                        <p:password value="" 
-                                     id="txtCidadeContNovo" maxlength="50" size="30" 
-                                     required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>  
-                       
-                        
-                        <p:outputLabel for="txtValorTotalContNovo" value="Valor Total: " indicateRequired="false"/>
-                        <p:selectOneMenu id="txtValorTotalContNovo" value="" style="width:125px">
+
+                        <p:outputLabel for="txtSenhaFuncNovo" value="Senha: " indicateRequired="false"/>                        
+                        <p:inputText value="#{funcionarioBean.funcionario.senha}" 
+                                    id="txtSenhaFuncNovo" maxlength="50" size="30" 
+                                    required="true" 
+                                    requiredMessage="Campo senha é obrigatório"/>
+
+                        <p:outputLabel for="txtEnderecoFuncNovo" value="Endereço: " indicateRequired="false"/>                        
+                        <p:inputText value="#{funcionarioBean.funcionario.endereco}" 
+                                    id="txtEnderecoFuncNovo" maxlength="50" size="30" 
+                                    required="true" 
+                                    requiredMessage="Campo endereco é obrigatório"/>
+
+                        <p:outputLabel for="txtCidadeFuncNovo" value="Cidade: " indicateRequired="false"/>                        
+                        <p:inputText value="#{funcionarioBean.funcionario.cidade}" 
+                                    id="txtCidadeFuncNovo" maxlength="50" size="30" 
+                                    required="true" 
+                                    requiredMessage="Campo cidade é obrigatório"/>  
+
+
+                        <p:outputLabel for="txtEstadoFuncNovo" value="Estado: " indicateRequired="false"/>
+                        <p:selectOneMenu id="txtEstadoFuncNovo" value="#{funcionarioBean.funcionario.estado}" style="width:125px">
                             <f:selectItem itemLabel="RS" itemValue="RS" />
                             <f:selectItem itemLabel="RJ" itemValue="RJ" />
                             <f:selectItem itemLabel="BH" itemValue="BH" />
                         </p:selectOneMenu>
-                        
-                        
+
+
                     </h:panelGrid>
                     <h:panelGrid columns="2">
-                            <p:commandButton value="Gravar" />
-                            <p:commandButton value="Cancelar" 
-						onclick="PF('dlgContNovo').hide();"
-						process="@this">
-                            <p:resetInput target="pnlConNovo"/>
-                            </p:commandButton>
-                    </h:panelGrid>	
+                        <p:commandButton value="Salvar"  actionListener="#{funcionarioBean.salvar}" oncomplete="PF('dialogo').hide();"
+                                         update=":mensagem :formCadastro:painel :formListagem:tabela"/>
+
+                        <p:commandButton value="Cancelar" oncomplete="PF('dialogo').hide();" process="@this">                            
+                            <p:resetInput target="painel"/>
+                        </p:commandButton>
+
+                    </h:panelGrid>
                 </h:form>
-                
+
             </p:dialog>
         </ui:define>
     </ui:composition>

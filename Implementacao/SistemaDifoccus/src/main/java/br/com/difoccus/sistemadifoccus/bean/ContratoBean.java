@@ -20,18 +20,19 @@ public class ContratoBean implements Serializable {
 	private List<Contrato> contratos;
 
 	public Contrato getContrato() {
-		return contrato;
+            return contrato;
 	}
 	public void setContrato(Contrato contrato) {
-		this.contrato = contrato;
+            this.contrato = contrato;
 	}
 
 	public List<Contrato> getContratos() {
-		return contratos;
+            return contratos;
         }
 	public void setContratos(List<Contrato> contratos) {
-		this.contratos = contratos;
-	}
+            this.contratos = contratos;
+	}        
+        
 
 	@PostConstruct
 	public void listar() {

@@ -24,7 +24,7 @@
                         </f:facet> 
                         
                         <p:column headerText="Contrato">
-                            <h:outputText value="#{contrato.semestre}" />
+                            <h:outputText value="#{contrato.nome}" />
                         </p:column>
                         
                         <p:column headerText="Status">
@@ -144,7 +144,7 @@
                                          update=":mensagem :formCadastro:painel :formListagem:tabela"/>
                         
                         <p:commandButton value="Cancelar" oncomplete="PF('dialogo').hide();" process="@this">                            
-                            <p:resetInput target="pnlConNovo"/>
+                            <p:resetInput target="painel"/>
 			</p:commandButton>
                             
                     </h:panelGrid>	

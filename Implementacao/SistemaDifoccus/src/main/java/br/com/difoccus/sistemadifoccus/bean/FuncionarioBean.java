@@ -1,49 +1,87 @@
 package br.com.difoccus.sistemadifoccus.bean;
 
+
 import java.util.List;
-import javax.faces.application.FacesMessage;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+
 import br.com.difoccus.sistemadifoccus.modelo.Funcionario;
 import br.com.difoccus.sistemadifoccus.dao.FuncionarioDAO;
 
-@ManagedBean(name="funcionarioBean")
-public class FuncionarioBean {
-    private Funcionario funcionario = new Funcionario();
-    private final FuncionarioDAO dao = new FuncionarioDAO();
-    private List<Funcionario> listaFuncionarios;
-    
-    public FuncionarioBean() {
-        listaFuncionarios = dao.listar();
-    }
-    
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
+import org.omnifaces.util.Messages;
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-    
-    public List<Funcionario> getListaFuncionarios() {
-        return listaFuncionarios;
-    }
-    
-    public void salvar() {
-        dao.salvar(funcionario);
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Funcionario incluído com sucesso.", "");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        funcionario = new Funcionario();
-    }
-    
-    public void carregar(int id) {
-        funcionario = dao.buscar(id);
-    }
-    
-    public void remover(Funcionario f) {
-        dao.excluir(f);
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Funcionario removido com sucesso.", "");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        listaFuncionarios.remove(funcionario);
-    }
+@ManagedBean
+@ViewScoped
+public class FuncionarioBean implements Serializable {
+	private Funcionario funcionario;
+	private List<Funcionario> funcionarios;
+
+	public Funcionario getFuncionario() {
+            return funcionario;
+	}
+	public void setFuncionario(Funcionario funcionario) {
+            this.funcionario = funcionario;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+            return funcionarios;
+        }
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+            this.funcionarios = funcionarios;
+	}        
+        
+
+	@PostConstruct
+	public void listar() {
+		try {
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+			funcionarios = funcionarioDAO.listar();
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao tentar listar os funcionarios");
+			erro.printStackTrace();
+		}
+	}
+
+	public void novo() {
+		funcionario = new Funcionario();
+	}
+
+	public void salvar() {
+		try {
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+			funcionarioDAO.merge(funcionario);
+
+			funcionario = new Funcionario();
+			funcionarios = funcionarioDAO.listar();
+
+			Messages.addGlobalInfo("Funcionario salvo com sucesso");
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao tentar salvar o funcionario");
+			erro.printStackTrace();
+		}
+	}
+
+	public void excluir(ActionEvent evento) {
+		try {
+			funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcionarioSelecionado");
+
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+			funcionarioDAO.excluir(funcionario);
+			
+			funcionarios = funcionarioDAO.listar();
+
+			Messages.addGlobalInfo("Funcionario removido com sucesso");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar remover o funcionario");
+			erro.printStackTrace();
+		}
+	}
+	
+	public void editar(ActionEvent evento){
+		funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcionarioSelecionado");
+	}
 }

@@ -217,5 +217,7 @@ public class Contrato {
         this.observacoes = observacoes;
     }
     
-    
+    public String getNome(){
+        return universidade + " " + semestre;
+    }
 }
