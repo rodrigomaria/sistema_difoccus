@@ -93,13 +93,14 @@
 
                         <p:outputLabel for="txtRGFuncNovo" value="RG: " indicateRequired="false"/>
                         <p:inputText value="#{funcionarioBean.funcionario.rg}" 
-                                     id="txtRGFuncNovo" maxlength="50" size="10" 
+                                     id="txtRGFuncNovo" maxlength="10" size="10" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
 
                         <p:outputLabel for="txtCPFFuncNovo" value="CPF: " indicateRequired="false"/>
-                        <p:inputText value="#{funcionarioBean.funcionario.cpf}" 
-                                     id="txtCPFFuncNovo" maxlength="50" size="14" 
+                        <p:inputMask value="#{funcionarioBean.funcionario.cpf}" 
+                                     id="txtCPFFuncNovo" maxlength="14" size="14"
+                                     mask="999.999.999-99"
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
 
@@ -130,13 +131,14 @@
 
                         <p:outputLabel for="txtNumeroContaFuncNovo" value="Numero da Conta: " indicateRequired="false"/>
                         <p:inputText value="#{funcionarioBean.funcionario.numConta}" 
-                                     id="txtNumeroContaFuncNovo" maxlength="50" size="30" 
+                                     id="txtNumeroContaFuncNovo" maxlength="6" size="6" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
 
                         <p:outputLabel for="txtTelefoneFuncNovo" value="Telefone: " indicateRequired="false"/>
-                        <p:inputText value="#{funcionarioBean.funcionario.telefone}" 
-                                     id="txtTelefoneFuncNovo" maxlength="50" size="30" 
+                        <p:inputMask value="#{funcionarioBean.funcionario.telefone}" 
+                                     id="txtTelefoneFuncNovo" maxlength="14" size="14"
+                                     mask="(99) 9999-9999"
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
 
@@ -144,10 +146,12 @@
                         <p:inputText value="#{funcionarioBean.funcionario.email}" 
                                      id="txtEmailFuncNovo" maxlength="50" size="30" 
                                      required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>
+                                     requiredMessage="Campo nome é obrigatório">
+                            <f:validateRegex pattern="^[a-zA-Z0-9\.\_]+@difoccus.com.br"/>
+                        </p:inputText>
 
                         <p:outputLabel for="txtSenhaFuncNovo" value="Senha: " indicateRequired="false"/>                        
-                        <p:inputText value="#{funcionarioBean.funcionario.senha}" 
+                        <p:password value="#{funcionarioBean.funcionario.senha}" 
                                     id="txtSenhaFuncNovo" maxlength="50" size="30" 
                                     required="true" 
                                     requiredMessage="Campo senha é obrigatório"/>

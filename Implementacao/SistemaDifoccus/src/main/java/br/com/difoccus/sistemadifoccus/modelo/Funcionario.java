@@ -184,10 +184,5 @@ public class Funcionario {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-    
-    
-    
-    
-    
+    } 
 }
