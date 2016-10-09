@@ -179,8 +179,9 @@
 
                     </h:panelGrid>
                     <h:panelGrid columns="2">
-                        <p:commandButton value="Salvar"  actionListener="#{funcionarioBean.salvar}" oncomplete="PF('dialogo').hide();"
-                                         update=":mensagem :formCadastro:painel :formListagem:tabela"/>
+                        <p:commandButton value="Salvar"  actionListener="#{funcionarioBean.salvar}"
+                                         update=":mensagem :formCadastro:painel :formListagem:tabela"
+                                         oncomplete="verifica(xhr, status, args, 'dialogo', 'tabela');"/>
 
                         <p:commandButton value="Cancelar" oncomplete="PF('dialogo').hide();" process="@this">                            
                             <p:resetInput target="painel"/>

@@ -69,39 +69,41 @@
                         <p:outputLabel for="txtUniversidadeContNovo" value="Universidade: " indicateRequired="false"/>
                         <p:inputText value="#{contratoBean.contrato.universidade}"
                                      id="txtUniversidadeContNovo" maxlength="50" size="30" required="true" 
-                                     requiredMessage="Campo nome é obrigatório" />
+                                     requiredMessage="Campo Universidade é obrigatório" />
 
                         <p:outputLabel for="txtSemestreContNovo" value="Semestre: " indicateRequired="false"/>                        
                         <p:inputText value="#{contratoBean.contrato.semestre}" 
                                      id="txtSemestreContNovo" maxlength="50" size="30" 
                                      required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>
+                                     requiredMessage="Campo Semestre é obrigatório"/>
 
                         <p:outputLabel for="txtDataContNovo" value="Data: " indicateRequired="false"/>
-                        <p:calendar id="txtDataContNovo" pattern="dd/MM/yyyy" mask="true"
-                                    required="true"  value="#{contratoBean.contrato.data}"/>
+                        <p:calendar id="txtDataContNovo" pattern="dd/MM/yyyy" mask="true"                                    
+                                    required="true"  value="#{contratoBean.contrato.data}"
+                                    requiredMessage="Campo Data é obrigatório"/>
 
                         <p:outputLabel for="txtHorarioContNovo" value="Horário: " indicateRequired="false"/>
                         <p:calendar id="txtHorarioContNovo" pattern="HH:mm" timeOnly="true" 
-                                    required="true"  value="#{contratoBean.contrato.horario}"/>
+                                    required="true"  value="#{contratoBean.contrato.horario}"
+                                    requiredMessage="Campo Horário é obrigatório"/>
 
                         <p:outputLabel for="txtSenhaContNovo" value="Senha: " indicateRequired="false"/>
                         <p:inputText value="#{contratoBean.contrato.senha}" 
                                      id="txtSenhaContNovo" maxlength="50" size="30" 
                                      required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>
+                                     requiredMessage="Campo Senha é obrigatório"/>
 
                         <p:outputLabel for="txtFestasContNovo" value="Quantidade festas: " indicateRequired="false"/>
                         <p:inputText value="#{contratoBean.contrato.festas}" 
                                      id="txtFestasContNovo" maxlength="7" size="5" 
                                      required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>
+                                     requiredMessage="Campo Quantidade de Festas é obrigatório"/>
 
                         <p:outputLabel for="txtFotosContNovo" value="Quantidade fotos: " indicateRequired="false"/>
                         <p:inputText value="#{contratoBean.contrato.fotos}" 
                                      id="txtFotosContNovo" maxlength="7" size="5" 
                                      required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>
+                                     requiredMessage="Campo Quantidade de Fotos é obrigatório"/>
 
                         <p:outputLabel value="Prova de Toga: " for="txtTogaContNovo"/>
                         <p:selectBooleanCheckbox id="txtTogaContNovo" value="#{contratoBean.contrato.toga}" />
@@ -109,11 +111,11 @@
                         <p:outputLabel value="Teaser: " for="txtTeaserContNovo"/>
                         <p:selectBooleanCheckbox id="txtTeaserContNovo" value="#{contratoBean.contrato.teaser}" />
 
-                        <p:outputLabel for="txtCreditoFotograficoContNovo" value="Quantidade fotos: " indicateRequired="false"/>
+                        <p:outputLabel for="txtCreditoFotograficoContNovo" value="Credito fotográfico " indicateRequired="false"/>
                         <p:inputText value="#{contratoBean.contrato.creditoFotografico}" 
                                      id="txtCreditoFotograficoContNovo" maxlength="7" size="5" 
                                      required="true" 
-                                     requiredMessage="Campo nome é obrigatório"/>
+                                     requiredMessage="Campo Credito fotográfico é obrigatório"/>
 
                         <p:outputLabel for="txtFotosLiberadasContNovo" value="Fotos Liberadas: " indicateRequired="false"/>
                         <p:selectBooleanCheckbox id="txtFotosLiberadasContNovo" value="#{contratoBean.contrato.fotosLiberadas}" />
@@ -122,25 +124,24 @@
                         <p:inputNumber value="#{contratoBean.contrato.valorTotal}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
                                        id="txtValorTotalContNovo" maxlength="10" size="12" 
                                        required="true" 
-                                       requiredMessage="Campo nome é obrigatório"/>
+                                       requiredMessage="Campo alor Total é obrigatório"/>
 
                         <p:outputLabel for="txtValorVistaContNovo" value="Valor Vista: " indicateRequired="false"/>
                         <p:inputNumber value="#{contratoBean.contrato.valorVista}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
                                        id="txtValorVistaContNovo" maxlength="10" size="12" 
                                        required="true" 
-                                       requiredMessage="Campo nome é obrigatório"/>
+                                       requiredMessage="Campo Valor Vista é obrigatório"/>
 
                         <p:outputLabel for="txtValorFormandoContNovo" value="Valor Formando: " indicateRequired="false"/>
                         <p:inputNumber value="#{contratoBean.contrato.valorFormando}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
                                        id="txtValorFormandoContNovo" maxlength="10" size="12" 
                                        required="true" 
-                                       requiredMessage="Campo nome é obrigatório"/>
+                                       requiredMessage="Campo Valor Formando é obrigatório"/>
 
                         <p:outputLabel for="txtObservacoesContNovo" value="Observações: " indicateRequired="false"/>
                         <p:inputTextarea value="#{contratoBean.contrato.observacoes}" rows="5" cols="50" maxlength="100"
                                          id="txtObservacoesContNovo" 
-                                         required="true" 
-                                         requiredMessage="Campo nome é obrigatório"/>
+                                         />
                     </h:panelGrid>
                     <h:panelGrid columns="2">
                         <p:commandButton value="Salvar"  actionListener="#{contratoBean.salvar}"
