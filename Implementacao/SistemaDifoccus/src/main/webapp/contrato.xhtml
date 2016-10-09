@@ -144,6 +144,7 @@
                     </h:panelGrid>
                     <h:panelGrid columns="2">
                         <p:commandButton value="Salvar"  actionListener="#{contratoBean.salvar}"
+                                         oncomplete="verifica(xhr, status, args, 'dialogo', 'tabela');"
                                          update=":mensagem :formCadastro:painel :formListagem:tabela"/>
                         
                         <p:commandButton value="Cancelar" oncomplete="PF('dialogo').hide();" process="@this">                            
