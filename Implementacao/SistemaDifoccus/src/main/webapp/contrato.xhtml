@@ -7,14 +7,12 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="templates/padraoInterno.xhtml">
-        <ui:define name="titulo">
-            Contratos
-        </ui:define>
+        
         <ui:define name="conteudo">
             <p:growl id="mensagem" />
             <h:form id="formListagem">
                 <p:panel header="Lista de Contratos">
-                    <p:dataTable id="tabela" value="#{contratoBean.contratos}" var="contrato" 
+                    <p:dataTable id="tabela" value="#{contratoBean.contratos}" var="contrato" reflow="true" 
                                  emptyMessage="Não tem nada" paginator="true" paginatorPosition="bottom" rows="20">
                         
                         <f:facet name="footer">                            
@@ -26,11 +24,11 @@
                         </f:facet> 
                         
                         <p:column headerText="Contrato">
-                            <h:outputText value="#{contrato.nome}" />
+                            <h:outputText value="#{contrato.contratoNome}" />
                         </p:column>
                         
                         <p:column headerText="Status">
-                            <h:outputText value="#{contrato.status}"/>
+                            <h:outputText value="#{contrato.statusNome}"/>
                         </p:column>
                         
                         <p:column headerText="Opções">
@@ -65,11 +63,23 @@
 
                 <h:form id="formCadastro">
                     <h:panelGrid columns="2" id="painel">  
+                        
+                        <h:outputText value="Status:" />
+                        <p:selectOneButton value="#{contratoBean.contrato.status}">
+                            <f:selectItem itemLabel="Em andamento" itemValue="0" />
+                            <f:selectItem itemLabel="Fechado" itemValue="1" />
+                            <f:selectItem itemLabel="Realizado" itemValue="2" />
+                        </p:selectOneButton>
 
                         <p:outputLabel for="txtUniversidadeContNovo" value="Universidade: " indicateRequired="false"/>
                         <p:inputText value="#{contratoBean.contrato.universidade}"
                                      id="txtUniversidadeContNovo" maxlength="50" size="30" required="true" 
                                      requiredMessage="Campo Universidade é obrigatório" />
+                        
+                        <p:outputLabel for="txtCursoContNovo" value="Curso " indicateRequired="false"/>
+                        <p:inputText value="#{contratoBean.contrato.curso}"
+                                     id="txtCursoContNovo" maxlength="50" size="30" required="true" 
+                                     requiredMessage="Campo Curso é obrigatório" />
 
                         <p:outputLabel for="txtSemestreContNovo" value="Semestre: " indicateRequired="false"/>                        
                         <p:inputText value="#{contratoBean.contrato.semestre}" 

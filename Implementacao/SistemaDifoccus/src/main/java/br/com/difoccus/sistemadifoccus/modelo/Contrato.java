@@ -22,6 +22,9 @@ public class Contrato {
     @Column(length = 50, nullable = false)
     private String universidade;
     
+    @Column(length = 50, nullable = false)
+    private String curso;
+    
     @Column(length = 20, nullable = false)
     private String semestre;
     
@@ -88,6 +91,13 @@ public class Contrato {
     }
     public void setUniversidade(String universidade) {
         this.universidade = universidade;
+    }
+    
+    public String getCurso() {
+        return curso;
+    }
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
 
     public String getSemestre() {
@@ -206,7 +216,16 @@ public class Contrato {
         this.observacoes = observacoes;
     }
     
-    public String getNome(){
-        return universidade + " " + semestre;
+    public String getContratoNome(){
+        return curso + " - " + universidade + " - " + semestre;
+    }
+    
+    public String getStatusNome(){
+        if(status == 0)
+            return "Em andamento";
+        else if(status == 1)
+            return "Fechado";
+        else
+            return "Realizado";
     }
 }
