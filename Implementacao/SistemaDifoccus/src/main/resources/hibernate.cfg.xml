@@ -22,7 +22,7 @@
     <property name="hbm2ddl.auto">update</property>
     
     <mapping class="br.com.difoccus.sistemadifoccus.modelo.Contrato"/>
-    <mapping class="br.com.difoccus.sistemadifoccus.modelo.Funcionario"/>
+    <mapping class="br.com.difoccus.sistemadifoccus.modelo.Funcionario"/>   
     
   </session-factory>
   

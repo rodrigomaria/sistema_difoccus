@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -53,10 +54,6 @@ public class Contrato {
     
     @Column(nullable = false)
     private double creditoFotografico;
-    
-//    @ManyToMany
-//    @JoinTable()
-//    private List<Midia> midia;
     
     @Column(nullable = false)
     private boolean fotosLiberadas;
@@ -168,13 +165,6 @@ public class Contrato {
         this.creditoFotografico = creditoFotografico;
     }
 
-//    public String getMidia() {
-//        return midia;
-//    }
-//
-//    public void setMidia(String midia) {
-//        this.midia = midia;
-//    }
 
     public boolean getFotosLiberadas() {
         return fotosLiberadas;
@@ -221,11 +211,13 @@ public class Contrato {
     }
     
     public String getStatusNome(){
-        if(status == 0)
-            return "Em andamento";
-        else if(status == 1)
-            return "Fechado";
-        else
-            return "Realizado";
+        switch (status) {
+            case 0:
+                return "Em andamento";
+            case 1:
+                return "Fechado";
+            default:
+                return "Realizado";
+        }
     }
 }
