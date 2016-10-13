@@ -14,7 +14,7 @@
             <p:growl id="mensagem" />
             <h:form id="formListagem">
                 <p:panel header="Lista de Contratos">
-                    <p:dataTable id="tabela" value="#{contratoBean.contratos}" var="contrato" 
+                    <p:dataTable id="tabela" value="#{contratoBean.contratos}" var="contrato" reflow="true"
                                  emptyMessage="Não tem nada" paginator="true" paginatorPosition="bottom" rows="20">
                         
                         <f:facet name="footer">                            

@@ -14,7 +14,7 @@
             <p:growl id="mensagem" />
             <h:form id="formListagem">
                 <p:panel header="Lista de Funcionarios">
-                    <p:dataTable id="tabela" value="#{funcionarioBean.funcionarios}" var="funcionario" 
+                    <p:dataTable id="tabela" value="#{funcionarioBean.funcionarios}" var="funcionario" reflow="true"
                                  emptyMessage="Não tem nada" paginator="true" paginatorPosition="bottom" rows="20">
 
                         <f:facet name="footer">                            
