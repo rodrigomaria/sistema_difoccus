@@ -13,9 +13,9 @@
         <ui:define name="conteudo">
             <p:growl id="mensagem" />
             <h:form id="formListagem">
-                <p:panel header="Lista de Funcionarios">
+                <p:panel header="Lista de funcionários">
                     <p:dataTable id="tabela" value="#{funcionarioBean.funcionarios}" var="funcionario" reflow="true"
-                                 emptyMessage="Não tem nada" paginator="true" paginatorPosition="bottom" rows="20">
+                                 emptyMessage="Não há funcionários cadastrados" paginator="true" paginatorPosition="bottom" rows="20">
 
                         <f:facet name="footer">                            
                             <p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
@@ -72,7 +72,7 @@
                     <h:panelGrid columns="2" id="painel">  
 
                         <p:outputLabel for="txtNomeFuncNovo" value="Nome: " indicateRequired="false"/>
-                        <p:inputText value="#{funcionarioBean.funcionario.nome}" placeholder="mudar isto aqui"
+                        <p:inputText value="#{funcionarioBean.funcionario.nome}"
                                      id="txtNomeFuncNovo" maxlength="50" size="30" 
                                      required="true" 
                                      requiredMessage="Campo nome é obrigatório"/>
