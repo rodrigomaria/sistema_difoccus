@@ -20,7 +20,9 @@
                         <f:facet name="footer">                            
                             <p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
                                              actionListener="#{contratoBean.novo}" 
-                                             update=":formCadastro:painel" />                            
+                                             update=":formCadastro:painel">
+                                <f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+                            </p:commandButton>
                         </f:facet> 
                         
                         <p:column headerText="Contrato">
@@ -43,6 +45,7 @@
                                              update=":formCadastro:painel"
                                              oncomplete="PF('dialogo').show();">
 				<f:attribute name="contratoSelecionado" value="#{contrato}" />
+                                <f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
                             </p:commandButton>
                             
                         </p:column>
@@ -140,7 +143,7 @@
                                          requiredMessage="Campo nome é obrigatório"/>
                     </h:panelGrid>
                     <h:panelGrid columns="2">
-                        <p:commandButton value="Salvar"  actionListener="#{contratoBean.salvar}" oncomplete="PF('dialogo').hide();"
+                        <p:commandButton value="Salvar"  actionListener="#{contratoBean.salvar}" oncomplete="verifica(xhr, status, args, 'dialogo', 'tabela');"
                                          update=":mensagem :formCadastro:painel :formListagem:tabela"/>
                         
                         <p:commandButton value="Cancelar" oncomplete="PF('dialogo').hide();" process="@this">                            
