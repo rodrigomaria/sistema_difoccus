@@ -14,8 +14,18 @@
             <p:growl id="mensagem" />
             <h:form id="formListagem">
                 <p:panel header="Lista de funcionários">
-                    <p:dataTable id="tabela" value="#{funcionarioBean.funcionarios}" var="funcionario" reflow="true"
-                                 emptyMessage="Não há funcionários cadastrados" paginator="true" paginatorPosition="bottom" rows="20">
+                    <p:dataTable id="tabela" value="#{funcionarioBean.funcionarios}" 
+                                 var="funcionario" reflow="true" widgetVar="tabela"
+                                 emptyMessage="Não há funcionários cadastrados" 
+                                 paginator="true" paginatorPosition="bottom" rows="20"
+                                 filteredValue="#{funcionarioBean.funcionariosFiltrados}">
+                        
+                        <f:facet name="header">
+                            <p:outputPanel style="text-align: left;">
+                                <h:outputText value="Pesquisa:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('tabela').filter();" style="width:150px; margin-left: 10px;"/>
+                            </p:outputPanel>
+                        </f:facet>
 
                         <f:facet name="footer">                            
                             <p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
@@ -24,13 +34,13 @@
                                 <f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
                             </p:commandButton>
                         </f:facet>                 
-                        <p:column headerText="Funcionario">
+                        <p:column headerText="Funcionario" filterBy="#{funcionario.nome}" filterStyle="display:none">
                             <h:outputText value="#{funcionario.nome}" />
                         </p:column>
-                        <p:column headerText="Cargo">
+                        <p:column headerText="Cargo"  filterBy="#{funcionario.cargo}" filterStyle="display:none">
                             <h:outputText value="#{funcionario.cargo}" />
                         </p:column>
-                        <p:column headerText="Setor">
+                        <p:column headerText="Setor"  filterBy="#{funcionario.setor}" filterStyle="display:none">
                             <h:outputText value="#{funcionario.setor}" />
                         </p:column>
                         

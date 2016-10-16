@@ -19,6 +19,7 @@ import org.omnifaces.util.Messages;
 public class FuncionarioBean implements Serializable {
     private Funcionario funcionario;
     private List<Funcionario> funcionarios;
+    private List<Funcionario> funcionariosFiltrados;
 
     public Funcionario getFuncionario() {
         return funcionario;
@@ -32,7 +33,17 @@ public class FuncionarioBean implements Serializable {
     }
     public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
-    }        
+    }   
+
+    public List<Funcionario> getFuncionariosFiltrados() {
+        return funcionariosFiltrados;
+    }
+
+    public void setFuncionariosFiltrados(List<Funcionario> funcionariosFiltrados) {
+        this.funcionariosFiltrados = funcionariosFiltrados;
+    }
+    
+    
 
 
     @PostConstruct

@@ -14,8 +14,18 @@
             <p:growl id="mensagem" />
             <h:form id="formListagem">
                 <p:panel header="Lista de contratos">
-                    <p:dataTable id="tabela" value="#{contratoBean.contratos}" var="contrato" reflow="true"
-                                 emptyMessage="Não há contratos cadastrados" paginator="true" paginatorPosition="bottom" rows="20">
+                    <p:dataTable id="tabela" value="#{contratoBean.contratos}" 
+                                 var="contrato" reflow="true" widgetVar="tabela"
+                                 emptyMessage="Não há contratos cadastrados" paginator="true" 
+                                 paginatorPosition="bottom" rows="20"
+                                 filteredValue="#{contratoBean.contratosFiltrados}">
+                        
+                        <f:facet name="header">
+                            <p:outputPanel style="text-align: left;">
+                                <h:outputText value="Pesquisa:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('tabela').filter();" style="width:150px; margin-left: 10px;"/>
+                            </p:outputPanel>
+                        </f:facet>
                         
                         <f:facet name="footer">                            
                             <p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
@@ -25,11 +35,11 @@
                             </p:commandButton>
                         </f:facet> 
                         
-                        <p:column headerText="Contrato">
+                        <p:column headerText="Contrato" filterBy="#{contrato.nome}" filterStyle="display:none">
                             <h:outputText value="#{contrato.nome}" />
                         </p:column>
                         
-                        <p:column headerText="Status">
+                        <p:column headerText="Status" filterBy="#{contrato.status}" filterStyle="display:none">
                             <h:outputText value="#{contrato.status}"/>
                         </p:column>
                         

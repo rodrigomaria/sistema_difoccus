@@ -18,6 +18,7 @@ import br.com.difoccus.sistemadifoccus.modelo.Contrato;
 public class ContratoBean implements Serializable {
     private Contrato contrato;
     private List<Contrato> contratos;
+    private List<Contrato> contratosFiltrados;
 
     public Contrato getContrato() {
         return contrato;
@@ -31,7 +32,17 @@ public class ContratoBean implements Serializable {
     }
     public void setContratos(List<Contrato> contratos) {
         this.contratos = contratos;
-    }        
+    }
+
+    public List<Contrato> getContratosFiltrados() {
+        return contratosFiltrados;
+    }
+
+    public void setContratosFiltrados(List<Contrato> contratosFiltrados) {
+        this.contratosFiltrados = contratosFiltrados;
+    }
+    
+    
 
 
     @PostConstruct
