@@ -209,4 +209,15 @@ public class Contrato {
     public String getNome(){
         return universidade + " " + semestre;
     }
+    
+    public String getStatusNome() {
+        switch (this.status) {
+            case 0:
+                return "Aberto";
+            case 1:
+                return "Em Negociação";
+            default:
+                return "fechado";
+        }
+    }
 }
