@@ -74,7 +74,7 @@
                     <h:panelGrid columns="2" id="painel"> 
                         
                         <h:outputText value="Status:" />
-                        <p:selectOneButton value="#{contrato.status}">
+                        <p:selectOneButton value="#{contratoBean.contrato.status}">
                             <f:selectItem itemLabel="Aberto" itemValue="0" />
                             <f:selectItem itemLabel="Em Negociação" itemValue="1" />
                             <f:selectItem itemLabel="Fechado" itemValue="2" />

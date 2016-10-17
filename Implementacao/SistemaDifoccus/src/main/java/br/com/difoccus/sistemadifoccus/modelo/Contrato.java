@@ -16,7 +16,7 @@ public class Contrato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column
+    @Column(nullable = false)
     private int status;
     
     @Column(length = 50, nullable = false)
@@ -217,7 +217,7 @@ public class Contrato {
             case 1:
                 return "Em Negociação";
             default:
-                return "fechado";
+                return "FSSechado";
         }
     }
 }
