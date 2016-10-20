@@ -118,10 +118,10 @@
                                      required="true" 
                                      requiredMessage="Campo CPF é obrigatório."/>
 
-                        <p:outputLabel for="txtDataFuncNovo" value="Data: " indicateRequired="false"/>
+                        <p:outputLabel for="txtDataFuncNovo" value="Data de nascimento: " indicateRequired="false"/>
                         <p:calendar id="txtDataFuncNovo" value="#{funcionarioBean.funcionario.dataNascimento}" pattern="dd/MM/yyyy" mask="true" maxdate="#{now}" />
 
-                        <p:outputLabel for="txtBancoFuncNovo" value="Banco " indicateRequired="false"/>                        
+                        <p:outputLabel for="txtBancoFuncNovo" value="Banco: " indicateRequired="false"/>                        
                         <p:selectOneMenu id="txtBancoFuncNovo" value="#{funcionarioBean.funcionario.banco}" style="width:125px">
                             <f:selectItem itemLabel="Banco do Brasil" itemValue="Banco do Brasil" />
                             <f:selectItem itemLabel="Banrisul" itemValue="Banrisul" />
@@ -130,7 +130,7 @@
                         </p:selectOneMenu>                        
 
                                            
-                        <p:outputLabel for="txtAgenciaFuncNovo" value="Agência " indicateRequired="false"/>
+                        <p:outputLabel for="txtAgenciaFuncNovo" value="Agência: " indicateRequired="false"/>
                         <p:inputText value="#{funcionarioBean.funcionario.agencia}" 
                                      id="txtAgenciaFuncNovo" maxlength="4" size="4" 
                                      required="true" 
