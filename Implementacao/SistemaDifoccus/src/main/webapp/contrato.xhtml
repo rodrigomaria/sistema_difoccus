@@ -152,9 +152,7 @@
 
                         <p:outputLabel for="txtObservacoesContNovo" value="Observações: " indicateRequired="false"/>
                         <p:inputTextarea value="#{contratoBean.contrato.observacoes}" rows="5" cols="50" maxlength="100"
-                                         id="txtObservacoesContNovo" 
-                                         required="true" 
-                                         requiredMessage="Campo observações é obrigatório."/>
+                                         id="txtObservacoesContNovo"/>
                     </h:panelGrid>
                     <h:panelGrid columns="2">
                         <p:commandButton value="Salvar"  actionListener="#{contratoBean.salvar}" oncomplete="verifica(xhr, status, args, 'dialogo', 'tabela');"

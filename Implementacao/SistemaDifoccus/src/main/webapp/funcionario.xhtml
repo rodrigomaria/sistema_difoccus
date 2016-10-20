@@ -119,7 +119,7 @@
                                      requiredMessage="Campo CPF é obrigatório."/>
 
                         <p:outputLabel for="txtDataFuncNovo" value="Data: " indicateRequired="false"/>
-                        <p:calendar id="txtDataFuncNovo" value="#{funcionarioBean.funcionario.dataNascimento}" pattern="dd/MM/yyyy" mask="true" />
+                        <p:calendar id="txtDataFuncNovo" value="#{funcionarioBean.funcionario.dataNascimento}" pattern="dd/MM/yyyy" mask="true" maxdate="#{now}" />
 
                         <p:outputLabel for="txtBancoFuncNovo" value="Banco " indicateRequired="false"/>                        
                         <p:selectOneMenu id="txtBancoFuncNovo" value="#{funcionarioBean.funcionario.banco}" style="width:125px">
@@ -160,7 +160,8 @@
                         <p:inputText value="#{funcionarioBean.funcionario.email}" 
                                      id="txtEmailFuncNovo" maxlength="50" size="30" 
                                      required="true" 
-                                     requiredMessage="Campo email é obrigatório.">
+                                     requiredMessage="Campo email é obrigatório."
+                                     validatorMessage="Email incorreto, obrigatório ...@difoccus.com.br">
                             <f:validateRegex pattern="^[a-zA-Z0-9\.\_]+@difoccus.com.br"/>
                         </p:inputText>
 
