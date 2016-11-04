@@ -27,7 +27,7 @@ public class Funcionario {
     @Column(length = 10, nullable = false)
     private String rg;
     
-    @Column(length = 14, nullable = false)
+    @Column(length = 14, nullable = false, unique = true)
     private String cpf;
     
     @Column(nullable = false)

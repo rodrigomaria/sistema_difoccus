@@ -12,6 +12,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import org.hibernate.exception.ConstraintViolationException;
 import org.omnifaces.util.Messages;
 
 @ManagedBean
@@ -70,8 +71,8 @@ public class FuncionarioBean implements Serializable {
             funcionarios = funcionarioDAO.listar();
 
             Messages.addGlobalInfo("Funcionario salvo com sucesso");
-        } catch (RuntimeException erro) {
-            Messages.addGlobalError("Ocorreu um erro ao tentar salvar o funcionario");
+        } catch (ConstraintViolationException erro) {
+            Messages.addGlobalError("CPF já cadastrado.");
             erro.printStackTrace();
         }
     }
