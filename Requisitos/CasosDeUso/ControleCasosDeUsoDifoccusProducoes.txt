@@ -1,4 +1,4 @@
-PRONTOS
+SPRINT1
 RF004	Listar funcionários
 RF005	Cadastrar funcionário
 RF006	Visualizar funcionário
@@ -12,7 +12,10 @@ RF013	Buscar contrato
 RF014	Editar contrato
 RF015	Excluir contrato
 
-PRÓXIMA SPRINT
+SPRINT2
+RF001	Efetuar login
+RF002	Efetuar logoff
+RF003	Esqueci minha senha
 RF016	Listar formandos
 RF017	Cadastrar formando
 RF018	Visualizar formando
@@ -22,8 +25,3 @@ RF021	Excluir formando
 RF022	Gerar relatório de funcionários
 RF023	Gerar relatório de contratos
 RF024	Gerar relatório de formandos
-
-PRONTOS
-RF001	Efetuar login
-RF002	Efetuar logoff
-RF003	Esqueci minha senha
