@@ -44,9 +44,6 @@ public class FuncionarioBean implements Serializable {
         this.funcionariosFiltrados = funcionariosFiltrados;
     }
     
-    
-
-
     @PostConstruct
     public void listar() {
         try {
