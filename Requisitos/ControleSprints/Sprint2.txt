@@ -1,0 +1,31 @@
+ENTREGÁVEIS SPRINT - MODELAGEM 28/11
+
+- escrita dos casos de uso implementados nesta sprint:
+RF001	Efetuar login
+RF002	Efetuar logoff
+RF003	Esqueci minha senha
+RF016	Listar formandos
+RF017	Cadastrar formando
+RF018	Visualizar formando
+RF019	Buscar formando
+RF020	Editar formando
+RF021	Excluir formando
+RF022	Gerar relatório de funcionários
+RF023	Gerar relatório de contratos
+RF024	Gerar relatório de formandos
+
+- atualização do diagrama de classes (modelo conceitual)
+- métodos
+- classe entidade
+- classe controle
+- classe fronteira
+
+Atualizar somente parte do diagrama, ou seja, não esqueça que a modelagem também é
+incremental. Para esta sprint somente as classes que estão envolvidas nas funcionalidades
+implementadas é que devem ser atualizadas.
+
+- diagramas de sequência para as funcionalidades implementadas nesta sprint;
+
+- diagrama de componente;
+
+- diagrama de implantação.
