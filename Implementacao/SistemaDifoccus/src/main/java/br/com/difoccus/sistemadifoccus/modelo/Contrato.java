@@ -2,7 +2,6 @@ package br.com.difoccus.sistemadifoccus.modelo;
 
 import java.util.Date;
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -217,7 +216,7 @@ public class Contrato {
             case 1:
                 return "Em Negociação";
             default:
-                return "FSSechado";
+                return "Fechado";
         }
     }
 }

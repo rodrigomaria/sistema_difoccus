@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="templates/padraoInterno.xhtml">
+        <ui:define name="conteudo">
+            <p:growl id="mensagem" />
+            <h:form id="formListagem">
+                <p:panel header="Formandos">
+                    <p:dataTable id="tabela" value="#{formandoBean.formandos}" 
+                                 var="formando" reflow="true" widgetVar="tabela"
+                                 emptyMessage="Não há formandos cadastrados." 
+                                 paginator="true" paginatorPosition="bottom" rows="20"
+                                 filteredValue="#{formandoBean.formandosFiltrados}">
+                        
+                        <f:facet name="header">
+                            <p:outputPanel style="text-align: left;">
+                                <h:outputText value="Pesquisa:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('tabela').filter();" style="width:150px; margin-left: 10px;"/>
+                            </p:outputPanel>
+                        </f:facet>
+
+                        <f:facet name="footer">                            
+                            <p:commandButton value="Novo" oncomplete="PF('dialogo').show();" 
+                                             actionListener="#{formandoBean.novo}" 
+                                             update=":formCadastro:painel">
+                                <f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+                            </p:commandButton>
+                        </f:facet>                 
+                        <p:column headerText="Nome" filterBy="#{formando.nome}" filterStyle="display:none">
+                            <h:outputText value="#{formando.nome}" />
+                        </p:column>
+                        <p:column headerText="Contrato"  filterBy="#{formando.contrato}" filterStyle="display:none">
+                            <h:outputText value="#{formando.contrato}" />
+                        </p:column>
+                        <p:column headerText="Telefone"  filterBy="#{formando.telefone}" filterStyle="display:none">
+                            <h:outputText value="#{formando.telefone}" />
+                        </p:column>
+                        <p:column headerText="Email"  filterBy="#{formando.email}" filterStyle="display:none">
+                            <h:outputText value="#{formando.email}" />
+                        </p:column>
+                        
+                        <p:column headerText="Opções">
+                            <p:commandButton icon="ui-icon-trash" actionListener="#{formandoBean.excluir}" 
+                                             update=":formListagem:tabela">
+				<p:confirm header="Confirmação" message="Deseja excluir este formando ?" icon="ui-icon-alert" />
+				<f:attribute name="formandoSelecionado" value="#{formando}"/>					
+                            </p:commandButton>
+                            
+                            <p:commandButton icon="ui-icon-pencil"
+                                             actionListener="#{formandoBean.editar}"
+                                             update=":formCadastro:painel"
+                                             oncomplete="PF('dialogo').show();">
+				<f:attribute name="formandoSelecionado" value="#{formando}" />
+                                <f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+                            </p:commandButton>
+                            
+                        </p:column>
+                        
+                    </p:dataTable>
+                    
+                    <p:confirmDialog global="true">
+                        <p:commandButton value="Sim" type="button"
+                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button"
+                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                    
+                </p:panel>
+            </h:form>
+
+            <!--            
+            nome, setor, cargo, RG, CPF, data de nascimento, banco, agência bancária, tipo de conta, 
+            número da conta, telefone, e-mail, senha de acesso ao sistema, endereço, cidade e estado.
+            -->
+
+            <p:dialog widgetVar="dialogo" closable="false" draggable="false" style="height: 200px;"
+                      resizable="false" header="Novo Formando" modal="true" appendTo="@(body)"> 
+
+                <h:form id="formCadastro">
+                    <h:panelGrid columns="2" id="painel">  
+
+                        <p:outputLabel for="txtNomeFormandoNovo" value="Nome: " indicateRequired="false"/>
+                        <p:inputText value="#{formandoBean.formando.nome}"
+                                     id="txtNomeFormandoNovo" maxlength="50" size="30" 
+                                     required="true" 
+                                     requiredMessage="Campo nome é obrigatório."/>
+                        
+                        <p:outputLabel for="txtCivilFormandoNovo" value="Estado civil: " indicateRequired="false"/>                        
+                        <p:selectOneMenu id="txtCivilFormandoNovo" value="#{formandoBean.formando.estadoCivil}" style="width:125px">
+                            <f:selectItem itemLabel="Solteiro" itemValue="Solteiro" />
+                            <f:selectItem itemLabel="Casado" itemValue="Casado" />
+                            <f:selectItem itemLabel="Viúvo" itemValue="Viúvo" />
+                            <f:selectItem itemLabel="Divorciado" itemValue="Divorciado" />
+                            <f:selectItem itemLabel="União estável" itemValue="União estável" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="txtCPFFormandoNovo" value="CPF: " indicateRequired="false"/>
+                        <p:inputMask value="#{formandoBean.formando.cpf}" 
+                                     id="txtCPFFormandoNovo" maxlength="14" size="14"
+                                     mask="999.999.999-99"
+                                     required="true" 
+                                     requiredMessage="Campo CPF é obrigatório."/>
+                        
+                        <p:outputLabel for="txtContratoFormandoNovo" value="Contrato: " indicateRequired="false"/>                        
+                        <p:selectOneMenu id="txtContratoFormandoNovo" value="#{formandoBean.formando.contrato}" style="width:125px">
+                            <f:selectItems value="#{formandoBean.contratos}" />
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Comissão: " for="txtComissaoFormandoNovo"/>
+                        <p:selectBooleanCheckbox id="txtComissaoFormandoNovo" value="#{formandoBean.formando.comissao}" />
+                        
+                        <p:outputLabel for="txtTelefoneFormandoNovo" value="Telefone: " indicateRequired="false"/>
+                        <p:inputMask value="#{formandoBean.formando.telefone}" 
+                                     id="txtTelefoneFormandoNovo" maxlength="14" size="14"
+                                     mask="(99) 9999-9999"
+                                     required="true" 
+                                     requiredMessage="Campo telefone é obrigatório"/>
+                        
+                        <p:outputLabel value="Retirada de mídia em vídeo: " for="txtRetiradaFormandoNovo"/>
+                        <p:selectBooleanCheckbox id="txtRetiradaFormandoNovo" value="#{formandoBean.formando.retiradaMidia}" />
+
+                        <p:outputLabel for="txtEmailFormandoNovo" value="Email: " indicateRequired="false"/>                        
+                        <p:inputText value="#{formandoBean.formando.email}" 
+                                     id="txtEmailFormandoNovo" maxlength="50" size="30" 
+                                     required="true" 
+                                     requiredMessage="Campo email é obrigatório."
+                                     validatorMessage="Email incorreto, obrigatório ...@difoccus.com.br">
+                            <f:validateRegex pattern="^[a-zA-Z0-9\.\_]+@difoccus.com.br"/>
+                        </p:inputText>
+
+                        <p:outputLabel for="txtEnderecoFormandoNovo" value="Endereço: " indicateRequired="false"/>                        
+                        <p:inputText value="#{formandoBean.formando.endereco}" 
+                                    id="txtEnderecoFormandoNovo" maxlength="50" size="30" 
+                                    required="true" 
+                                    requiredMessage="Campo endereço é obrigatório."/>
+
+                        <p:outputLabel for="txtCidadeFormandoNovo" value="Cidade: " indicateRequired="false"/>                        
+                        <p:inputText value="#{formandoBean.formando.cidade}" 
+                                    id="txtCidadeFormandoNovo" maxlength="50" size="30" 
+                                    required="true" 
+                                    requiredMessage="Campo cidade é obrigatório."/>  
+
+                        <p:outputLabel for="txtBairroFormandoNovo" value="Bairro: " indicateRequired="false"/>                        
+                        <p:inputText value="#{formandoBean.formando.cidade}" 
+                                    id="txtBairroFormandoNovo" maxlength="50" size="30" 
+                                    required="true" 
+                                    requiredMessage="Campo bairro é obrigatório."/>
+                        
+                        <p:outputLabel for="txtValorPagarFormandoNovo" value="Valor a pagar: " indicateRequired="false"/>
+                        <p:inputNumber value="#{formandoBean.formando.valorAPagar}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       id="txtValorPagarFormandoNovo" maxlength="10" size="12" 
+                                       required="true" 
+                                       requiredMessage="Campo valor a pagar é obrigatório."/>
+                        
+                        <p:outputLabel for="txtValorPagoFormandoNovo" value="Valor pago: " indicateRequired="false"/>
+                        <p:inputNumber value="#{formandoBean.formando.valorPago}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       id="txtValorPagoFormandoNovo" maxlength="10" size="12" 
+                                       required="true" 
+                                       requiredMessage="Campo valor pago é obrigatório."/>
+
+                        <p:outputLabel for="txtValorAbertoFormandoNovo" value="Valor em aberto: " indicateRequired="false"/>
+                        <p:inputNumber value="#{formandoBean.formando.valorEmAberto}" minValue="0" symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       id="txtValorAbertoFormandoNovo" maxlength="10" size="12" 
+                                       required="true" 
+                                       requiredMessage="Campo valor em aberto é obrigatório."/>
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Salvar"  actionListener="#{formandoBean.salvar}" oncomplete="verifica(xhr, status, args, 'dialogo', 'tabela');"
+                                         update=":mensagem :formCadastro:painel :formListagem:tabela"/>
+
+                        <p:commandButton value="Cancelar" oncomplete="PF('dialogo').hide();" process="@this">                            
+                            <p:resetInput target="painel"/>
+                        </p:commandButton>
+
+                    </h:panelGrid>
+                </h:form>
+
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+</html>
