@@ -23,6 +23,7 @@
     
     <mapping class="br.com.difoccus.sistemadifoccus.modelo.Contrato"/>
     <mapping class="br.com.difoccus.sistemadifoccus.modelo.Funcionario"/>
+    <mapping class="br.com.difoccus.sistemadifoccus.modelo.Formando"/>
     
   </session-factory>
   

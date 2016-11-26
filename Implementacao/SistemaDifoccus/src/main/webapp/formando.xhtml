@@ -107,7 +107,7 @@
                                      requiredMessage="Campo CPF é obrigatório."/>
                         
                         <p:outputLabel for="txtContratoFormandoNovo" value="Contrato: " indicateRequired="false"/>                        
-                        <p:selectOneMenu id="txtContratoFormandoNovo" value="#{formandoBean.formando.contrato}" style="width:125px">
+                        <p:selectOneMenu id="txtContratoFormandoNovo" value="#{formandoBean.formando.contrato}" converter="omnifaces.SelectItemsConverter" style="width:125px">
                             <f:selectItems value="#{formandoBean.contratos}" />
                         </p:selectOneMenu>
                         
@@ -146,7 +146,7 @@
                                     requiredMessage="Campo cidade é obrigatório."/>  
 
                         <p:outputLabel for="txtBairroFormandoNovo" value="Bairro: " indicateRequired="false"/>                        
-                        <p:inputText value="#{formandoBean.formando.cidade}" 
+                        <p:inputText value="#{formandoBean.formando.bairro}" 
                                     id="txtBairroFormandoNovo" maxlength="50" size="30" 
                                     required="true" 
                                     requiredMessage="Campo bairro é obrigatório."/>

@@ -53,18 +53,29 @@ public class FormandoBean implements Serializable {
     @PostConstruct
     public void listar() {
         try {
-            ContratoDAO contratoDAO = new ContratoDAO();
+            
             FormandoDAO formandoDAO = new FormandoDAO();
             formandos = formandoDAO.listar();
-            contratos = contratoDAO.listar();
+            
         } catch (RuntimeException erro) {
             Messages.addGlobalError("Ocorreu um erro ao tentar listar os formandos");
             erro.printStackTrace();
         }
     }
 
-    public void novo() {
-        formando = new Formando();
+    public void novo(){
+        try {
+            formando = new Formando();
+            ContratoDAO contratoDao = new ContratoDAO();
+            contratos = contratoDao.listar();
+        } 
+        catch (Exception e) {
+            Messages.addFlashGlobalError("Ocorreu um erro ao gerar uma nova cidade");
+            //erro.printStackTrace();
+        }
+ 
+        
+        
     }
 
     public void salvar() {

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -50,9 +52,9 @@ public class Contrato {
     @Column(nullable = false)
     private double creditoFotografico;
     
-//    @ManyToMany
-//    @JoinTable()
-//    private List<Midia> midia;
+    //@ManyToMany
+    //@JoinTable()
+    //private List<Midia> midia;
     
     @Column(nullable = false)
     private boolean fotosLiberadas;
@@ -218,5 +220,10 @@ public class Contrato {
             default:
                 return "Fechado";
         }
+    }
+    
+    @Override
+    public String toString() {
+        return String.format(getNome(), getClass().getSimpleName(), getId());
     }
 }
