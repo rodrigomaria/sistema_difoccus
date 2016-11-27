@@ -23,6 +23,18 @@ incremental. Para esta sprint somente as classes que estão envolvidas nas funcio
 implementadas é que devem ser atualizadas.
 
 - diagramas de sequência para as funcionalidades implementadas nesta sprint;
+RF001	Efetuar login OK
+RF002	Efetuar logoff OK
+RF003	Esqueci minha senha OK
+RF016	Listar formandos OK
+RF017	Cadastrar formando OK
+RF018	Visualizar formando OK
+RF019	Buscar formando OK
+RF020	Editar formando OK
+RF021	Excluir formando OK
+RF022	Gerar relatório de funcionários OK
+RF023	Gerar relatório de contratos OK
+RF024	Gerar relatório de formandos OK
 
 - diagrama de componente;
 
