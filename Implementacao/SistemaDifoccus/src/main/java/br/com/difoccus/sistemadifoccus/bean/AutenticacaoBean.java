@@ -7,8 +7,11 @@ package br.com.difoccus.sistemadifoccus.bean;
 
 import br.com.difoccus.sistemadifoccus.dao.FuncionarioDAO;
 import br.com.difoccus.sistemadifoccus.modelo.Funcionario;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import org.omnifaces.util.Messages;
 
 /**
  *
@@ -30,13 +33,28 @@ public class AutenticacaoBean {
         this.funcionarioLogado = funcionarioLogado;
     }
     
-    public void entrar(){
+    public String entrar(){
         try {
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
             funcionarioLogado = funcionarioDAO.autenticar(funcionarioLogado.getEmail(), funcionarioLogado.getSenha());
+            if(funcionarioLogado == null){
+                Messages.addGlobalInfo("Falha ao autenticar");
+                return "login";
+            }
+            else{
+                Messages.addGlobalInfo("Usuario autenticado");
+                return "contrato";
+            }
         } catch (Exception e) {
             
         }
-        
+        return "login";
     }
+    
+    public String sair(){
+        funcionarioLogado = null;
+        return "login.xhtml?faces-redirect=true";
+    }
+    
+
 }

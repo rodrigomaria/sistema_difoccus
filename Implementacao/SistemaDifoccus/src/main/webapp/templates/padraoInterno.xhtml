@@ -3,7 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+   
     
     <h:head>
         <title><ui:insert name="titulo"/></title>
@@ -12,6 +15,7 @@
     </h:head>
     
     <h:body>
+        
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="110">
                 <h1><ui:insert name="titulo"/></h1>
@@ -23,6 +27,7 @@
                         <p:menuitem ajax="false" value="Funcionários" action="funcionario"/>
                         <p:menuitem ajax="false" value="Contratos" action="contrato"/>
                         <p:menuitem ajax="false" value="Formandos" action="formando"/>
+                        <p:menuitem ajax="false" value="Sair" action="#{autenticacaoBean.sair()}"/>
                     </p:menu>
                 </h:form>
             </p:layoutUnit>
@@ -30,5 +35,7 @@
                 <ui:insert name="conteudo"/>
             </p:layoutUnit>
         </p:layout>
+        
     </h:body>
+   
 </html>

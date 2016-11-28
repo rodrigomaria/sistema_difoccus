@@ -14,10 +14,12 @@ import org.hibernate.Session;
  * @author awsilva
  */
 public class testeUtil {
+    
     public static void main(String[] args) {
 	Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 	sessao.close();
 	HibernateUtil.getFabricaDeSessoes().close();
         System.out.println("OI");
     }
+    
 }

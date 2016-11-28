@@ -14,7 +14,7 @@ public class FuncionarioDAO extends GenericDAO<Funcionario> {
         Funcionario funcionario = null;
 
         try {
-            Query consulta = sessao.getNamedQuery("SELECT f FROM Funcionario f WHERE f.email = :email AND f.senha = :senha ");
+            Query consulta = sessao.createQuery("SELECT f FROM Funcionario f WHERE f.email = :email AND f.senha = :senha");
             consulta.setString("email", email);
             consulta.setString("senha", senha);
             
@@ -25,8 +25,7 @@ public class FuncionarioDAO extends GenericDAO<Funcionario> {
         } finally {
             sessao.close();
         }
-        return funcionario;
-        
+        return funcionario;        
     }
     
 }
