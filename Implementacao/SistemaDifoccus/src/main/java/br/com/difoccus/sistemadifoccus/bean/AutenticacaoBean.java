@@ -7,10 +7,15 @@ package br.com.difoccus.sistemadifoccus.bean;
 
 import br.com.difoccus.sistemadifoccus.dao.FuncionarioDAO;
 import br.com.difoccus.sistemadifoccus.modelo.Funcionario;
+import br.com.difoccus.sistemadifoccus.util.SessaoHibernateUtil;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import org.omnifaces.util.Messages;
 
 /**
@@ -21,7 +26,8 @@ import org.omnifaces.util.Messages;
 @SessionScoped
 public class AutenticacaoBean {
     
-    private Funcionario funcionarioLogado;
+    private Funcionario funcionarioLogado;   
+    
   
     public Funcionario getFuncionarioLogado() {
         if(funcionarioLogado == null)
@@ -33,6 +39,15 @@ public class AutenticacaoBean {
         this.funcionarioLogado = funcionarioLogado;
     }
     
+    public void filtro(){
+        if(funcionarioLogado.getEmail() == null || funcionarioLogado.getSenha() == null)
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(AutenticacaoBean.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    
     public String entrar(){
         try {
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
@@ -42,6 +57,8 @@ public class AutenticacaoBean {
                 return "login";
             }
             else{
+                HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                sessao.setAttribute("usuario", funcionarioLogado);
                 Messages.addGlobalInfo("Usuario autenticado");
                 return "contrato";
             }

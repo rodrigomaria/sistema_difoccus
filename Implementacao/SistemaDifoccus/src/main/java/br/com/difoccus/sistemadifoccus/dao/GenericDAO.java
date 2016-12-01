@@ -9,6 +9,9 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.difoccus.sistemadifoccus.util.HibernateUtil;
+import org.hibernate.exception.ConstraintViolationException;
+import org.omnifaces.util.Messages;
+
 
 
 public class GenericDAO<Entidade> {
@@ -75,11 +78,17 @@ public class GenericDAO<Entidade> {
             transacao = sessao.beginTransaction();
             sessao.delete(entidade);
             transacao.commit();
+        } catch(ConstraintViolationException e){
+            if (transacao != null) {
+                transacao.rollback();
+            }
+            Messages.addGlobalInfo("Falha ao excluir");
+            throw e;
         } catch (RuntimeException erro) {
             if (transacao != null) {
                     transacao.rollback();
             }
-            throw erro;
+            throw erro; 
         } finally {
             sessao.close();
         }
