@@ -36,6 +36,6 @@ RF022	Gerar relatório de funcionários OK
 RF023	Gerar relatório de contratos OK
 RF024	Gerar relatório de formandos OK
 
-- diagrama de componente;
+- diagrama de componente; OK
 
-- diagrama de implantação.
+- diagrama de implantação. OK
